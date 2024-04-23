@@ -193,7 +193,7 @@ MaxTenuringThreshold of 20 is invalid; must be between 0 and 15
 
 > 当元空间溢出时会得到如下错误：`java.lang.OutOfMemoryError: MetaSpace`
 
-你可以使用 `-XX：MaxMetaspaceSize` 标志设置最大元空间大小，默认值为 unlimited，这意味着它只受系统内存的限制。`-XX：MetaspaceSize` 调整标志定义元空间的初始大小如果未指定此标志，则 Metaspace 将根据运行时的应用程序需求动态地重新调整大小。
+你可以使用 `-XX：MaxMetaspaceSize` 标志设置最大元空间大小，默认值为 unlimited，这意味着它只受系统内存的限制。`-XX：MetaspaceSize` 调整标志定义元空间的初始大小。如果未指定此标志，则 Metaspace 将根据运行时的应用程序需求动态地重新调整大小。
 
 2、元空间里面存放的是类的元数据，这样加载多少类的元数据就不由 `MaxPermSize` 控制了, 而由系统的实际可用空间来控制，这样能加载的类就更多了。
 
@@ -361,7 +361,7 @@ Java 对象的创建过程我建议最好是能默写出来，并且要掌握每
 
 这两种对象访问方式各有优势。使用句柄来访问的最大好处是 reference 中存储的是稳定的句柄地址，在对象被移动时只会改变句柄中的实例数据指针，而 reference 本身不需要修改。使用直接指针访问方式最大的好处就是速度快，它节省了一次指针定位的时间开销。
 
-HotSpot 虚拟机主要使用的就是这种方式来进行对象访问。
+HotSpot 虚拟机主要使用直接指针来进行对象访问。
 
 ## 参考
 
